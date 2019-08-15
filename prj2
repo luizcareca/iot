@@ -33,5 +33,5 @@ function sendToAPI() {
 }
 
 function setLuxText(resp,lux) {
-    txt.SetText( resp +" level = " + lux + " lux" );
+    txt.SetText( resp +" Nivel = " + lux + " lux" );
 }
