@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Internet das Coisas</title>
+	  <script>
+     luxGlobal = 0;
+
+function OnStart()
+{
+    //criar layout centralizados verticalmente
+    lay = app.CreateLayout( "linear", "VCenter,FillXY" );    
+
+    //criar label texto e adiciona ao layout
+    txt = app.CreateText( "Medindo Lux" );
+    txt.SetTextSize( 32 );
+    lay.AddChild( txt );
+    
+    //adicionar o layout ao app    
+    app.AddLayout( lay );
+    
+    sns = app.CreateSensor("Light");
+    sns.SetOnChange( sns_OnChange );
+    sns.Start();
+    setInterval(sendToAPI, 1000);
+}
+
+function sendToAPI() {
+  const http = new XMLHttpRequest()
+  
+  http.open("GET", "http://api.thingspeak.com/update?api_key=KU8BSIQVAWA331R6&field1=0"+luxGlobal)
+  http.send()
+  http.onload = setLuxText(http.responseText, luxGlobal)
+}
+
+function sns_OnChange( lux )
+{
+  luxGlobal = lux;
+}
+
+
+
+function setLuxText(resp,lux) {
+    txt.SetText( resp +" Nivel = " + lux + " lux" );
+}
+        
+    </script>
+  </head>
+  
+
+  
+  <body>
+
+    <h1>Thingspeak</h1>
+    <p>Utilizando DroidScript </p>
+   	
+  <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="http://thingspeak.com/channels/839388/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+
+  </body>
+</html>
