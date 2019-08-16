@@ -1,37 +1,32 @@
-luxGlobal = 0;
-//Chamada quando a aplicacao inicia
+dirGlobal=0;
 function OnStart()
 {
-    //criar layout centralizados verticalmente
-    lay = app.CreateLayout( "linear", "VCenter,FillXY" );    
+    lay = app.CreateLayout( "Linear", "VCenter,FillXY" );
 
-    //criar label texto e adiciona ao layout
-    txt = app.CreateText( "Medindo lux" );
-    txt.SetTextSize( 32 );
+    txt = app.CreateText( "", 0.8, 0.3, "Multiline" );
     lay.AddChild( txt );
-    
-    //adicionar o layout ao app    
     app.AddLayout( lay );
-    
-    sns = app.CreateSensor("Light");
+
+    sns = app.CreateSensor( "Accelerometer" );
     sns.SetOnChange( sns_OnChange );
     sns.Start();
-    setInterval(sendToAPI, 10000);
+    setInterval(sendToAPI,3000);
+
 }
 
-function sns_OnChange( lux )
+function sns_OnChange(x)
 {
-  luxGlobal = lux;
+    dirGlobal=x;
 }
 
 function sendToAPI() {
   const http = new XMLHttpRequest()
   
-  http.open("GET", "https://api.thingspeak.com/update?api_key=ZJL904XR0FKPBVQR&field1="+luxGlobal)
+  http.open("GET", "https://api.thingspeak.com/update?api_key=ZJL904XR0FKPBVQR&field1="+dirGlobal)
   http.send()
-  http.onload = setLuxText(http.responseText, luxGlobal)
+  http.onload = setLuxText(http.responseText, dirGlobal)
 }
 
-function setLuxText(resp,lux) {
-    txt.SetText( resp +" Nivel = " + lux + " lux" );
+function setLuxText(resp,x) {
+    txt.SetText( resp +" Direção x = " + x + " metros" );
 }
