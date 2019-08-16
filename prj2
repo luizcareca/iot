@@ -27,7 +27,7 @@ function sns_OnChange( lux )
 function sendToAPI() {
   const http = new XMLHttpRequest()
   
-  http.open("GET", "https://api.thingspeak.com/update?api_key=KU8BSIQVAWA331R6&field1="+luxGlobal)
+  http.open("GET", "https://api.thingspeak.com/update?api_key=ZJL904XR0FKPBVQR&field1="+luxGlobal)
   http.send()
   http.onload = setLuxText(http.responseText, luxGlobal)
 }
