@@ -32,7 +32,7 @@ function sendToAPI() {
   const http = new XMLHttpRequest()
   
   //http.open("GET", "https://api.thingspeak.com/update?api_key=ZJL904XR0FKPBVQR&field1="+dirGlobal)
-  http.open("POST", "https://stravitzky.000webhostapp.com/api.php/lux_s");
+  http.open("POST", "https://stravitzky.000webhostapp.com/api.php/lux_sensor");
   http.setRequestHeader("Content-type", "application/json");
   var data = JSON.stringify({"valor":""+dirGlobal});
   http.send(data);
