@@ -50,6 +50,5 @@ function setLuxText(resp,x) {
 <p>A cada movimentação do celular no eixo x, é transmitido um valor de velocidade para o gráfico, que é gerado a partir do funcionamento do script de aceleração</p>
 <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/846897/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line"></iframe>
 
-
 </body>
 </html>
